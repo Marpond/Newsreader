@@ -1,14 +1,13 @@
-﻿using System.Diagnostics;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace Newsreader;
 
 public partial class News : Window
 {
-    private Client _client;
-    private BindedData _bindedData;
+    private readonly BindedData _bindedData;
+    private readonly Client _client;
+
     public News(Client client, BindedData bindedData)
     {
         InitializeComponent();

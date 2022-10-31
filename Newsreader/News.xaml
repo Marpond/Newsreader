@@ -3,35 +3,37 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:local="clr-namespace:Newsreader"
         mc:Ignorable="d"
         Title="News" Height="800" Width="1200">
     <Grid>
         <TabControl>
             <TabItem Width="100" Height="50" Header="Browsing">
                 <Grid>
-                    
+
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"></ColumnDefinition>
-                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="2*" />
                     </Grid.ColumnDefinitions>
-                    <ListBox Grid.Column="0" Name="listBoxGroups" SelectionChanged="ListBoxGroups_OnSelectionChanged" ItemsSource="{Binding Path=Groups}"></ListBox>
-                    
+                    <ListBox Grid.Column="0" Name="listBoxGroups" SelectionChanged="ListBoxGroups_OnSelectionChanged"
+                             ItemsSource="{Binding Path=Groups}" />
+
                     <Grid Grid.Column="1">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*"></ColumnDefinition>
-                            <ColumnDefinition Width="4*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="4*" />
                         </Grid.ColumnDefinitions>
-                        <ListBox Grid.Column="0" Name="listBoxArticles" SelectionChanged="ListBoxArticles_OnSelectionChanged" ItemsSource="{Binding Path=Articles}"></ListBox>
-                        <ListBox Grid.Column="1" Name="listBoxArticleText" SelectionChanged="ListBoxArticleText_OnSelectionChanged" ItemsSource="{Binding Path=ArticleText}"></ListBox>
+                        <ListBox Grid.Column="0" Name="listBoxArticles"
+                                 SelectionChanged="ListBoxArticles_OnSelectionChanged"
+                                 ItemsSource="{Binding Path=Articles}" />
+                        <ListBox Grid.Column="1" Name="listBoxArticleText"
+                                 SelectionChanged="ListBoxArticleText_OnSelectionChanged"
+                                 ItemsSource="{Binding Path=ArticleText}" />
                     </Grid>
-                    
+
                 </Grid>
             </TabItem>
             <TabItem Width="100" Height="50" Header="Posting">
-                <Grid>
-                    
-                </Grid>
+                <Grid />
             </TabItem>
         </TabControl>
     </Grid>

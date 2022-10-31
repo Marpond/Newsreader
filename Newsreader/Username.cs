@@ -13,10 +13,8 @@ public static class Username
         {
             // Check if file exists
             if (File.Exists(PATH))
-            {
                 // Read username from file
                 return File.ReadAllText(PATH);
-            }
 
             // Create file
             File.Create(PATH).Close();
@@ -34,19 +32,16 @@ public static class Username
         // Write the new value
         File.WriteAllText(PATH, value);
     }
-    
+
     public static void Delete()
     {
         CheckFileExists();
         // Clear the file
         File.WriteAllText(PATH, string.Empty);
     }
-    
+
     private static void CheckFileExists()
     {
-        if (!File.Exists(PATH))
-        {
-            File.Create(PATH);
-        }
+        if (!File.Exists(PATH)) File.Create(PATH);
     }
 }

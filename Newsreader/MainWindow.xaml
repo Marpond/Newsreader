@@ -7,29 +7,30 @@
         Title="MainWindow" Height="800" Width="1200">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="20*" />
         </Grid.RowDefinitions>
-        
-            <TextBlock Grid.Row="0" Text="Username" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-            <TextBox Grid.Row="1" Text="{Binding Path=UserName}" Name="Username" Width="200" TextAlignment="Center"/>
-            <Grid Grid.Row="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="12*"/>
-                    <ColumnDefinition Width="10*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="Remember username" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                <CheckBox Grid.Column="1" Name="checkBox" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            </Grid>
-            
-            <TextBlock Grid.Row="3" Text="Password" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-            <PasswordBox Grid.Row="4" Name="Password" Width="50" />
-            
-            <Button Grid.Row="5" Name="Login" Content="Login" Click="Login_OnClick" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+        <TextBlock Grid.Row="0" Text="Username" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+        <TextBox Grid.Row="1" Text="{Binding Path=UserName}" Name="Username" Width="200" TextAlignment="Center" />
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="12*" />
+                <ColumnDefinition Width="10*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="Remember username" HorizontalAlignment="Right" VerticalAlignment="Center" />
+            <CheckBox Grid.Column="1" Name="checkBox" HorizontalAlignment="Left" VerticalAlignment="Center" />
+        </Grid>
+
+        <TextBlock Grid.Row="3" Text="Password" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+        <PasswordBox Grid.Row="4" Name="Password" Width="50" />
+
+        <Button Grid.Row="5" Name="Login" Content="Login" Click="Login_OnClick" Width="100"
+                HorizontalAlignment="Center" VerticalAlignment="Center" />
     </Grid>
 </Window>

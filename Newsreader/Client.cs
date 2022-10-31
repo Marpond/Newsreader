@@ -5,8 +5,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Net.Sockets;
 using System.Text;
-using System.Windows;
-using Microsoft.VisualBasic;
 
 namespace Newsreader;
 
@@ -14,17 +12,18 @@ public class Client
 {
     private const string SERVER_NAME = "news.sunsite.dk";
     private const int SERVER_PORT = 119;
-    private NetworkStream? _networkStream;
-    private StreamReader? _streamReader;
-    private TcpClient? _tcpClient;
-    private StreamWriter? _streamWriter;
 
     private readonly List<string> _badResponses = new()
     {
         "500 What?",
         "501 user Name|pass Password",
-        "502 Authentication failed (Please register at http://dotsrc.org/usenet/)",
+        "502 Authentication failed (Please register at http://dotsrc.org/usenet/)"
     };
+
+    private NetworkStream? _networkStream;
+    private StreamReader? _streamReader;
+    private StreamWriter? _streamWriter;
+    private TcpClient? _tcpClient;
 
     public ObservableCollection<string> Foo(string command)
     {
@@ -34,20 +33,20 @@ public class Client
         while (true)
         {
             // get the line
-            string? line = _streamReader?.ReadLine();
+            var line = _streamReader?.ReadLine();
             if (line is ".") break;
             list.Add(line);
         }
 
         return list;
     }
-    
+
     public void Login(string username, string password)
     {
         Connect();
         // Ignore the welcome message
         _streamReader?.ReadLine();
-        SendCommand($"authinfo user {username}"); 
+        SendCommand($"authinfo user {username}");
         SendCommand($"authinfo pass {password}");
     }
 
@@ -57,7 +56,7 @@ public class Client
         Debug.WriteLine($"Sent: {command}");
         ValidateResponse();
     }
-    
+
     private void Close()
     {
         _tcpClient?.Close();
@@ -68,16 +67,16 @@ public class Client
 
     private void Connect()
     {
-        _tcpClient = new(SERVER_NAME, SERVER_PORT);
+        _tcpClient = new TcpClient(SERVER_NAME, SERVER_PORT);
         _networkStream = _tcpClient.GetStream();
-        _streamReader = new(_networkStream, Encoding.UTF8);
-        _streamWriter = new(_networkStream);
+        _streamReader = new StreamReader(_networkStream, Encoding.UTF8);
+        _streamWriter = new StreamWriter(_networkStream);
         _streamWriter.AutoFlush = true;
     }
 
     private void ValidateResponse()
     {
-        string? response = _streamReader?.ReadLine();
+        var response = _streamReader?.ReadLine();
         Debug.WriteLine($"Received: {response}");
         if (response is null || _badResponses.Contains(response))
         {
