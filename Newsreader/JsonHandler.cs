@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text.Json.Serialization;
-using System.Threading;
 using Newtonsoft.Json;
 
 namespace Newsreader;
 
 public static class JsonHandler
 {
-    private const string PATH = $"../data.json";
+    private const string PATH = "../data.json";
 
     public static List<User>? GetUsers()
     {
@@ -37,9 +34,9 @@ public static class JsonHandler
     {
         var users = GetUsers();
         users!.ForEach(user => user.Saved = user.Username == username);
-        File.WriteAllText(PATH,string.Join("\n", users.Select(JsonConvert.SerializeObject)));
+        File.WriteAllText(PATH, string.Join("\n", users.Select(JsonConvert.SerializeObject)));
     }
-    
+
     public static void ForgetUsername()
     {
         var users = GetUsers();
@@ -52,7 +49,7 @@ public static class JsonHandler
         var user = GetUsers()!.First(user => user.Username == username);
         return new ObservableCollection<string>(user.FavoriteGroups);
     }
-    
+
     public static void AddFavoriteGroup(string group, string username)
     {
         var users = GetUsers();
@@ -61,7 +58,7 @@ public static class JsonHandler
         user.FavoriteGroups.Add(group);
         File.WriteAllText(PATH, string.Join("\n", users!.Select(JsonConvert.SerializeObject)));
     }
-    
+
     public static void RemoveFavoriteGroup(string group, string username)
     {
         var users = GetUsers();
@@ -70,17 +67,17 @@ public static class JsonHandler
         user.FavoriteGroups.Remove(group);
         File.WriteAllText(PATH, string.Join("\n", users!.Select(JsonConvert.SerializeObject)));
     }
-    
+
     public static void AddNewUser(string username)
     {
         User user = new()
         {
             Username = username,
             Saved = false,
-            FavoriteGroups = new()
+            FavoriteGroups = new List<string>()
         };
         var json = JsonConvert.SerializeObject(user);
-        File.AppendAllText(PATH,json);
+        File.AppendAllText(PATH, json);
     }
 
     public class User

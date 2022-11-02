@@ -10,9 +10,9 @@ namespace Newsreader;
 /// </summary>
 public partial class MainWindow
 {
+    public static string CurrentUsername;
     private readonly BindedData _bindedData = new();
     private readonly Client _client = new();
-    public static string CurrentUsername;
 
     public MainWindow()
     {
@@ -23,22 +23,30 @@ public partial class MainWindow
 
     private void Login_OnClick(object sender, RoutedEventArgs e)
     {
+        try
+        {
             CurrentUsername = Username.Text;
             _client.Login(CurrentUsername, Password.Password);
             MessageBox.Show("Logged in!");
-            
-            
-            if (JsonHandler.GetUsers() is null || JsonHandler.GetUsers()!.All(user => !user.Username.Equals(CurrentUsername)))
-                JsonHandler.AddNewUser(CurrentUsername);
-            Debug.Print($"Saved new user: {CurrentUsername}");
-            
-            if (saveUsernameCheckBox.IsChecked is true)
-                JsonHandler.RememberUsername(CurrentUsername);
-            else
-                JsonHandler.ForgetUsername();
+        }
+        catch (Exception exception)
+        {
+            MessageBox.Show(exception.Message);
+            return;
+        }
 
-            // Switch to News.xaml
-            var news = new News(_client, _bindedData);
-            Content = news.Content;
+        if (JsonHandler.GetUsers() is null ||
+            JsonHandler.GetUsers()!.All(user => !user.Username.Equals(CurrentUsername)))
+            JsonHandler.AddNewUser(CurrentUsername);
+        Debug.Print($"Saved new user: {CurrentUsername}");
+
+        if (saveUsernameCheckBox.IsChecked is true)
+            JsonHandler.RememberUsername(CurrentUsername);
+        else
+            JsonHandler.ForgetUsername();
+
+        // Switch to News.xaml
+        var news = new News(_client, _bindedData);
+        Content = news.Content;
     }
 }

@@ -8,9 +8,9 @@ namespace Newsreader;
 
 public partial class News : Window
 {
+    private readonly List<string> _allGroups;
     private readonly BindedData _bindedData;
     private readonly Client _client;
-    private readonly List<string> _allGroups;
 
     public News(Client client, BindedData bindedData)
     {
@@ -18,7 +18,8 @@ public partial class News : Window
         _client = client;
         _bindedData = bindedData;
         _allGroups = _client.GetObservableCollection("list").ToList();
-        UpdateGroups();
+        _bindedData.Groups = new ObservableCollection<string>(_allGroups);
+        UpdateFavoriteGroups();
     }
 
     private void ListBoxBothGroups_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -44,27 +45,29 @@ public partial class News : Window
 
     private void TextBoxFilter_OnTextChanged(object sender, TextChangedEventArgs e)
     {
+        _bindedData.Groups = new ObservableCollection<string>(_allGroups.Where(group => group.Contains(textBoxFilter.Text)));
         var favoriteGroups = JsonHandler.GetFavoriteGroups(MainWindow.CurrentUsername);
-        _bindedData.Groups = new ObservableCollection<string>(_allGroups.Where(group => group.Contains(textBoxFilter.Text) && !favoriteGroups.Contains(group)));
         _bindedData.FavoriteGroups = new ObservableCollection<string>(favoriteGroups.Where(group => group.Contains(textBoxFilter.Text)));
     }
 
     private void ButtonFavoriteGroup_OnClick(object sender, RoutedEventArgs e)
     {
         JsonHandler.AddFavoriteGroup(listBoxGroups.SelectedItem.ToString()!, MainWindow.CurrentUsername);
-        UpdateGroups();
+        UpdateFavoriteGroups();
     }
 
     private void ButtonRemoveFavoriteGroup_OnClick(object sender, RoutedEventArgs e)
     {
+        var index = listBoxFavoriteGroups.SelectedIndex;
         JsonHandler.RemoveFavoriteGroup(listBoxFavoriteGroups.SelectedItem.ToString()!, MainWindow.CurrentUsername);
-        UpdateGroups();
+        UpdateFavoriteGroups();
+        // Move one index down with the selection
+        if (listBoxFavoriteGroups.Items.Count > index)
+            listBoxFavoriteGroups.SelectedIndex = index;
     }
 
-    private void UpdateGroups()
+    private void UpdateFavoriteGroups()
     {
         _bindedData.FavoriteGroups = JsonHandler.GetFavoriteGroups(MainWindow.CurrentUsername);
-        _bindedData.Groups = new ObservableCollection<string>(_allGroups.Where(group =>
-            !JsonHandler.GetFavoriteGroups(MainWindow.CurrentUsername).Contains(group)));
     }
 }

@@ -6,8 +6,8 @@ public class BindedData : Bindable
 {
     private ObservableCollection<string> _articles = new();
     private ObservableCollection<string> _articleText = new();
-    private ObservableCollection<string> _groups = new();
     private ObservableCollection<string> _favoriteGroups = new();
+    private ObservableCollection<string> _groups = new();
     private string? _username;
 
     public BindedData()
@@ -54,7 +54,7 @@ public class BindedData : Bindable
             PropertyIsChanged();
         }
     }
-    
+
     public ObservableCollection<string> FavoriteGroups
     {
         get => _favoriteGroups;

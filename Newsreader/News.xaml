@@ -16,30 +16,40 @@
                     </Grid.ColumnDefinitions>
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="1*"></RowDefinition>
-                            <RowDefinition Height="20*"></RowDefinition>
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="20*" />
                         </Grid.RowDefinitions>
-                        <TextBox Grid.Row="0" Name="textBoxFilter" TextChanged="TextBoxFilter_OnTextChanged"></TextBox>
+                        <TextBox Grid.Row="0" Name="textBoxFilter" TextChanged="TextBoxFilter_OnTextChanged" />
                         <Grid Grid.Row="1">
                             <TabControl>
                                 <TabItem Header="Groups">
                                     <Grid>
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="20*"></RowDefinition>
-                                            <RowDefinition Height="1*"></RowDefinition>
+                                            <RowDefinition Height="20*" />
+                                            <RowDefinition Height="1*" />
                                         </Grid.RowDefinitions>
-                                        <ListBox Grid.Row="0" Name="listBoxGroups" SelectionChanged="ListBoxBothGroups_OnSelectionChanged" ItemsSource="{Binding Path=Groups}" />
-                                        <Button Grid.Row="1" IsEnabled="{Binding ElementName=listBoxGroups, Path=SelectedItems.Count}" Name="buttonFavoriteGroup" Content="Favorite group" Click="ButtonFavoriteGroup_OnClick"></Button>
+                                        <ListBox Grid.Row="0" Name="listBoxGroups"
+                                                 SelectionChanged="ListBoxBothGroups_OnSelectionChanged"
+                                                 ItemsSource="{Binding Path=Groups}" />
+                                        <Button Grid.Row="1"
+                                                IsEnabled="{Binding ElementName=listBoxGroups, Path=SelectedItems.Count}"
+                                                Name="buttonFavoriteGroup" Content="Favorite group"
+                                                Click="ButtonFavoriteGroup_OnClick" />
                                     </Grid>
                                 </TabItem>
                                 <TabItem Header="Favorite groups">
                                     <Grid>
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="20*"></RowDefinition>
-                                            <RowDefinition Height="1*"></RowDefinition>
+                                            <RowDefinition Height="20*" />
+                                            <RowDefinition Height="1*" />
                                         </Grid.RowDefinitions>
-                                        <ListBox Grid.Row="0" Name="listBoxFavoriteGroups" SelectionChanged="ListBoxBothGroups_OnSelectionChanged" ItemsSource="{Binding Path=FavoriteGroups}" />
-                                        <Button Grid.Row="1" IsEnabled="{Binding ElementName=listBoxFavoriteGroups, Path=SelectedItems.Count}" Name="buttonRemoveFavoriteGroup" Content="Remove favorite group" Click="ButtonRemoveFavoriteGroup_OnClick"></Button>
+                                        <ListBox Grid.Row="0" Name="listBoxFavoriteGroups"
+                                                 SelectionChanged="ListBoxBothGroups_OnSelectionChanged"
+                                                 ItemsSource="{Binding Path=FavoriteGroups}" />
+                                        <Button Grid.Row="1"
+                                                IsEnabled="{Binding ElementName=listBoxFavoriteGroups, Path=SelectedItems.Count}"
+                                                Name="buttonRemoveFavoriteGroup" Content="Remove favorite group"
+                                                Click="ButtonRemoveFavoriteGroup_OnClick" />
                                     </Grid>
                                 </TabItem>
                             </TabControl>
