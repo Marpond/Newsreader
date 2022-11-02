@@ -45,9 +45,11 @@ public partial class News : Window
 
     private void TextBoxFilter_OnTextChanged(object sender, TextChangedEventArgs e)
     {
-        _bindedData.Groups = new ObservableCollection<string>(_allGroups.Where(group => group.Contains(textBoxFilter.Text)));
+        _bindedData.Groups =
+            new ObservableCollection<string>(_allGroups.Where(group => group.Contains(textBoxFilter.Text)));
         var favoriteGroups = JsonHandler.GetFavoriteGroups(MainWindow.CurrentUsername);
-        _bindedData.FavoriteGroups = new ObservableCollection<string>(favoriteGroups.Where(group => group.Contains(textBoxFilter.Text)));
+        _bindedData.FavoriteGroups =
+            new ObservableCollection<string>(favoriteGroups.Where(group => group.Contains(textBoxFilter.Text)));
     }
 
     private void ButtonFavoriteGroup_OnClick(object sender, RoutedEventArgs e)
