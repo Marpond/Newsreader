@@ -25,7 +25,7 @@ public class Client
     private StreamWriter? _streamWriter;
     private TcpClient? _tcpClient;
 
-    public ObservableCollection<string> Foo(string command)
+    public ObservableCollection<string> GetObservableCollection(string command)
     {
         var list = new ObservableCollection<string>();
         SendCommand(command);

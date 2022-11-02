@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Marcell\\RiderProjects\\Newsreader\\Newsreader\\Newsreader.csproj": {}
+    "C:\\Users\\Marpond\\RiderProjects\\Newsreader\\Newsreader\\Newsreader.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Marcell\\RiderProjects\\Newsreader\\Newsreader\\Newsreader.csproj": {
+    "C:\\Users\\Marpond\\RiderProjects\\Newsreader\\Newsreader\\Newsreader.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Marcell\\RiderProjects\\Newsreader\\Newsreader\\Newsreader.csproj",
+        "projectUniqueName": "C:\\Users\\Marpond\\RiderProjects\\Newsreader\\Newsreader\\Newsreader.csproj",
         "projectName": "Newsreader",
-        "projectPath": "C:\\Users\\Marcell\\RiderProjects\\Newsreader\\Newsreader\\Newsreader.csproj",
-        "packagesPath": "C:\\Users\\Marcell\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Marcell\\RiderProjects\\Newsreader\\Newsreader\\obj\\",
+        "projectPath": "C:\\Users\\Marpond\\RiderProjects\\Newsreader\\Newsreader\\Newsreader.csproj",
+        "packagesPath": "C:\\Users\\Marpond\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Marpond\\RiderProjects\\Newsreader\\Newsreader\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Marcell\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Marpond\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0-windows"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -39,6 +37,16 @@
       "frameworks": {
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
+          "dependencies": {
+            "Json.Net": {
+              "target": "Package",
+              "version": "[1.0.33, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[9.0.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -58,7 +66,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -17,14 +17,14 @@
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="0" Text="Username" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
-        <TextBox Grid.Row="1" Text="{Binding Path=UserName}" Name="Username" Width="200" TextAlignment="Center" />
+        <TextBox Grid.Row="1" Text="{Binding Path=Username}" Name="Username" Width="200" TextAlignment="Center" />
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="12*" />
                 <ColumnDefinition Width="10*" />
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0" Text="Remember username" HorizontalAlignment="Right" VerticalAlignment="Center" />
-            <CheckBox Grid.Column="1" Name="checkBox" HorizontalAlignment="Left" VerticalAlignment="Center" />
+            <CheckBox Grid.Column="1" Name="saveUsernameCheckBox" HorizontalAlignment="Left" VerticalAlignment="Center" />
         </Grid>
 
         <TextBlock Grid.Row="3" Text="Password" HorizontalAlignment="Center" VerticalAlignment="Bottom" />

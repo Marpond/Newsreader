@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Linq;
 using System.Windows;
 
 namespace Newsreader;
@@ -10,33 +12,33 @@ public partial class MainWindow
 {
     private readonly BindedData _bindedData = new();
     private readonly Client _client = new();
+    public static string CurrentUsername;
 
     public MainWindow()
     {
         InitializeComponent();
         DataContext = _bindedData;
-        if (!_bindedData.UserName!.Equals(string.Empty)) checkBox.IsChecked = true;
+        saveUsernameCheckBox.IsChecked = !_bindedData.Username!.Equals(string.Empty);
     }
 
     private void Login_OnClick(object sender, RoutedEventArgs e)
     {
-        try
-        {
-            _client.Login(Username.Text, Password.Password);
+            CurrentUsername = Username.Text;
+            _client.Login(CurrentUsername, Password.Password);
             MessageBox.Show("Logged in!");
-            if (checkBox.IsChecked is true)
-                Newsreader.Username.Set(Username.Text);
+            
+            
+            if (JsonHandler.GetUsers() is null || JsonHandler.GetUsers()!.All(user => !user.Username.Equals(CurrentUsername)))
+                JsonHandler.AddNewUser(CurrentUsername);
+            Debug.Print($"Saved new user: {CurrentUsername}");
+            
+            if (saveUsernameCheckBox.IsChecked is true)
+                JsonHandler.RememberUsername(CurrentUsername);
             else
-                Newsreader.Username.Delete();
+                JsonHandler.ForgetUsername();
 
-            _bindedData.Groups = _client.Foo("list");
             // Switch to News.xaml
             var news = new News(_client, _bindedData);
             Content = news.Content;
-        }
-        catch (Exception exception)
-        {
-            MessageBox.Show(exception.Message);
-        }
     }
 }

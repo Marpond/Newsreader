@@ -7,19 +7,20 @@ public class BindedData : Bindable
     private ObservableCollection<string> _articles = new();
     private ObservableCollection<string> _articleText = new();
     private ObservableCollection<string> _groups = new();
-    private string? _userName;
+    private ObservableCollection<string> _favoriteGroups = new();
+    private string? _username;
 
     public BindedData()
     {
-        _userName = Username.Get();
+        _username = JsonHandler.GetRememberedUsername();
     }
 
-    public string? UserName
+    public string? Username
     {
-        get => _userName;
+        get => _username;
         set
         {
-            _userName = value;
+            _username = value;
             PropertyIsChanged();
         }
     }
@@ -50,6 +51,16 @@ public class BindedData : Bindable
         set
         {
             _articleText = value;
+            PropertyIsChanged();
+        }
+    }
+    
+    public ObservableCollection<string> FavoriteGroups
+    {
+        get => _favoriteGroups;
+        set
+        {
+            _favoriteGroups = value;
             PropertyIsChanged();
         }
     }

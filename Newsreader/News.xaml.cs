@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Newsreader;
@@ -7,31 +10,61 @@ public partial class News : Window
 {
     private readonly BindedData _bindedData;
     private readonly Client _client;
+    private readonly List<string> _allGroups;
 
     public News(Client client, BindedData bindedData)
     {
         InitializeComponent();
         _client = client;
         _bindedData = bindedData;
+        _allGroups = _client.GetObservableCollection("list").ToList();
+        UpdateGroups();
     }
 
-    private void ListBoxGroups_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void ListBoxBothGroups_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (listBoxGroups.SelectedItem is null) return;
-        var item = listBoxGroups.SelectedItem.ToString();
-        _bindedData.Articles = _client.Foo($"listgroup {item}");
+        if (sender is not ListBox listBox) return;
+        var item = listBox.SelectedItem as string;
+        var articleText = _client.GetObservableCollection($"listgroup {item}");
+        _bindedData.Articles = articleText;
     }
 
     private void ListBoxArticles_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (listBoxArticles.SelectedItem is null) return;
         var item = listBoxArticles.SelectedItem.ToString();
-        _bindedData.ArticleText = _client.Foo($"article {item}");
+        _bindedData.ArticleText = _client.GetObservableCollection($"article {item}");
     }
 
     private void ListBoxArticleText_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         // Unselect the item
         listBoxArticleText.SelectedIndex = -1;
+    }
+
+    private void TextBoxFilter_OnTextChanged(object sender, TextChangedEventArgs e)
+    {
+        var favoriteGroups = JsonHandler.GetFavoriteGroups(MainWindow.CurrentUsername);
+        _bindedData.Groups = new ObservableCollection<string>(_allGroups.Where(group => group.Contains(textBoxFilter.Text) && !favoriteGroups.Contains(group)));
+        _bindedData.FavoriteGroups = new ObservableCollection<string>(favoriteGroups.Where(group => group.Contains(textBoxFilter.Text)));
+    }
+
+    private void ButtonFavoriteGroup_OnClick(object sender, RoutedEventArgs e)
+    {
+        JsonHandler.AddFavoriteGroup(listBoxGroups.SelectedItem.ToString()!, MainWindow.CurrentUsername);
+        UpdateGroups();
+    }
+
+    private void ButtonRemoveFavoriteGroup_OnClick(object sender, RoutedEventArgs e)
+    {
+        JsonHandler.RemoveFavoriteGroup(listBoxFavoriteGroups.SelectedItem.ToString()!, MainWindow.CurrentUsername);
+        UpdateGroups();
+    }
+
+    private void UpdateGroups()
+    {
+        _bindedData.FavoriteGroups = JsonHandler.GetFavoriteGroups(MainWindow.CurrentUsername);
+        _bindedData.Groups = new ObservableCollection<string>(_allGroups.Where(group =>
+            !JsonHandler.GetFavoriteGroups(MainWindow.CurrentUsername).Contains(group)));
     }
 }
