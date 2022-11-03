@@ -72,7 +72,41 @@
                 </Grid>
             </TabItem>
             <TabItem Width="100" Height="50" Header="Posting">
-                <Grid />
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="20*" />
+                        <RowDefinition Height="1*" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="10*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="From:" Width="80" HorizontalAlignment="Right" />
+                        <TextBox Grid.Column="1" Name="textBoxFrom" Width="200" HorizontalAlignment="Left" />
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="10*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Subject:" Width="80" HorizontalAlignment="Right" />
+                        <TextBox Grid.Column="1" Name="textBoxSubject" Width="200" HorizontalAlignment="Left" />
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="10*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Newsgroups:" Width="80" HorizontalAlignment="Right" />
+                        <TextBox Grid.Column="1" Name="textBoxNewsgroups" Width="200" HorizontalAlignment="Left" />
+                    </Grid>
+                    <TextBox Grid.Row="3" Name="textBoxBody" />
+                    <Button Grid.Row="4" Name="buttonPost" Content="Post" Click="ButtonPost_OnClick" />
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>

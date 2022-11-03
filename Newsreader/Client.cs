@@ -57,6 +57,17 @@ public class Client
         ValidateResponse();
     }
 
+    public void Post(string from, string subject, string newsGroup, string body)
+    {
+        SendCommand("post");
+        SendCommand($"From: {from}");
+        SendCommand($"Subject: {subject}");
+        SendCommand($"Newsgroups: {newsGroup}");
+        SendCommand("");
+        SendCommand(body);
+        SendCommand(".");
+    }
+
     private void Close()
     {
         _tcpClient?.Close();

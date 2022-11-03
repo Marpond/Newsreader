@@ -72,4 +72,21 @@ public partial class News : Window
     {
         _bindedData.FavoriteGroups = JsonHandler.GetFavoriteGroups(MainWindow.CurrentUsername);
     }
+
+    private void ButtonPost_OnClick(object sender, RoutedEventArgs e)
+    {
+        if (textBoxFrom.Text == "" || textBoxSubject.Text == "" || textBoxBody.Text == "")
+        {
+            MessageBox.Show("Please fill in all fields");
+        }
+        else
+        {
+            _client.Post(
+                textBoxFrom.Text,
+                textBoxSubject.Text,
+                textBoxNewsgroups.Text,
+                textBoxBody.Text);
+            MessageBox.Show("Post successful");
+        }
+    }
 }
