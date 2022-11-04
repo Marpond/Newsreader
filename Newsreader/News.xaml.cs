@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -75,18 +76,25 @@ public partial class News : Window
 
     private void ButtonPost_OnClick(object sender, RoutedEventArgs e)
     {
-        if (textBoxFrom.Text == "" || textBoxSubject.Text == "" || textBoxBody.Text == "")
+        if (textBlockFrom.Text == "" || textBoxSubject.Text == "" || textBoxNewsgroups.Text == "" || textBoxBody.Text == "")
         {
             MessageBox.Show("Please fill in all fields");
         }
         else
         {
-            _client.Post(
-                textBoxFrom.Text,
-                textBoxSubject.Text,
-                textBoxNewsgroups.Text,
-                textBoxBody.Text);
-            MessageBox.Show("Post successful");
+            try
+            {
+                _client.Post(
+                    textBlockFrom.Text,
+                    textBoxSubject.Text,
+                    textBoxNewsgroups.Text,
+                    textBoxBody.Text);
+                MessageBox.Show("Post successful");
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
     }
 }

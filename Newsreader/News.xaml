@@ -86,7 +86,7 @@
                             <ColumnDefinition Width="10*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Text="From:" Width="80" HorizontalAlignment="Right" />
-                        <TextBox Grid.Column="1" Name="textBoxFrom" Width="200" HorizontalAlignment="Left" />
+                        <TextBlock Grid.Column="1" Text="{Binding Path=Username}" Name="textBlockFrom" Width="200" HorizontalAlignment="Left" />
                     </Grid>
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
